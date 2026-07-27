@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">软件库</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_software">软件</string>
+    <string name="nav_discover">发现</string>
+    <string name="nav_more">更多</string>
+
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="phone">手机号</string>
+    <string name="email">邮箱</string>
+    <string name="verify_code">验证码</string>
+    <string name="get_verify_code">获取验证码</string>
+    <string name="logging_in">登录中...</string>
+    <string name="registering">注册中...</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="logout">退出登录</string>
+
+    <string name="search_software">搜索软件</string>
+    <string name="download">下载</string>
+    <string name="downloading">下载中</string>
+    <string name="download_complete">下载完成</string>
+    <string name="download_failed">下载失败</string>
+
+    <string name="software_detail">软件详情</string>
+    <string name="software_intro">软件介绍</string>
+    <string name="usage_notice">使用须知</string>
+    <string name="app_recommend">应用推荐</string>
+    <string name="favorite">收藏</string>
+    <string name="share">分享</string>
+
+    <string name="notice">公告</string>
+    <string name="notice_declaration">公告声明</string>
+    <string name="faq">常见问题</string>
+    <string name="permanent_address">永久地址</string>
+    <string name="business_contact">商务联系</string>
+    <string name="software_feedback">软件反馈</string>
+    <string name="join_group">加入群聊</string>
+
+    <string name="download_manage">下载管理</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="clear_success">清理成功</string>
+    <string name="favorite_success">收藏成功</string>
+    <string name="cancel_favorite">取消收藏</string>
+
+    <string name="no_data">暂无数据</string>
+    <string name="network_error">网络错误</string>
+    <string name="retry">重试</string>
+    <string name="loading">加载中...</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="pull_up_load_more">上拉加载更多</string>
+    <string name="no_more_data">没有更多数据了</string>
+
+    <string name="confirm_delete">确认删除</string>
+    <string name="confirm_exit">确认退出</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="view">查看</string>
+    <string name="pin">置顶</string>
+    <string name="off_shelf">已下架</string>
+    <string name="on_shelf">已上架</string>
+    <string name="pinning">置顶中</string>
+
+    <string name="all">全部</string>
+    <string name="hot">热门</string>
+    <string name="latest">最新</string>
+    <string name="recommend">推荐</string>
+
+    <string name="version_name">版本</string>
+    <string name="file_size">大小</string>
+    <string name="update_date">更新日期</string>
+    <string name="developer">开发者</string>
+    <string name="download_count">下载次数</string>
+
+    <string name="check_update">检查更新</string>
+    <string name="about_us">关于我们</string>
+    <string name="user_agreement">用户协议</string>
+    <string name="privacy_policy">隐私政策</string>
+
+    <string name="input_username_hint">请输入用户名</string>
+    <string name="input_password_hint">请输入密码</string>
+    <string name="input_phone_hint">请输入手机号</string>
+    <string name="input_email_hint">请输入邮箱</string>
+    <string name="input_verify_code_hint">请输入验证码</string>
+
+    <string name="password_min_length">密码至少6位</string>
+    <string name="phone_format_error">手机号格式错误</string>
+    <string name="email_format_error">邮箱格式错误</string>
+    <string name="login_failed">登录失败</string>
+    <string name="register_failed">注册失败</string>
+
+    <string name="welcome">欢迎使用软件库</string>
+    <string name="slogan">发现优质软件，尽享数字生活</string>
+
+    <string name="practical_tools">实用功能</string>
+    <string name="feedback_success">反馈提交成功</string>
+    <string name="submitting">提交中...</string>
+    <string name="input_feedback_content">反馈内容</string>
+    <string name="input_feedback_hint">请输入您的反馈内容</string>
+    <string name="input_contact">联系方式</string>
+    <string name="input_contact_hint">选填：请输入手机号或邮箱</string>
+
+    <string name="copied_to_clipboard">已复制到剪贴板</string>
+    <string name="logout_success">已退出登录</string>
+    <string name="share_software">分享软件</string>
+    <string name="about_us">关于我们</string>
+
+    <string name="notice_area">公告专区</string>
+    <string name="notice_disclaimer">公告声明</string>
+    <string name="common_questions">常见问题</string>
+    <string name="recommended">推荐软件</string>
+    <string name="download_software">下载软件</string>
+    <string name="permanent_url">永久地址</string>
+    <string name="permanent_url_desc">一定要收藏起来</string>
+    <string name="contact">商务联系</string>
+    <string name="contact_desc">联系我们</string>
+    <string name="feedback_desc">有问题可以反馈</string>
+    <string name="join_group_desc">点击加入</string>
+    <string name="more_options">更多选项</string>
+    <string name="download_management">下载管理</string>
+</resources>

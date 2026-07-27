@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SoftwareStoreTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent_orange</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <style name="SoftwareStoreTheme.Splash" parent="SoftwareStoreTheme">
+        <item name="android:windowBackground">@drawable/bg_splash_gradient</item>
+    </style>
+
+    <style name="SoftwareStoreTheme.Login" parent="SoftwareStoreTheme">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+</resources>
