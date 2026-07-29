@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- strings.xml - 字符串资源 -->
+<resources>
+    <!-- 应用名称 -->
+    <string name="app_name">软件库</string>
+    <string name="app_slogan">海量软件 · 一键直达</string>
+
+    <!-- 启动页 -->
+    <string name="splash_skip">跳过</string>
+    <string name="splash_ad">广告</string>
+
+    <!-- 底部导航 -->
+    <string name="tab_home">首页</string>
+    <string name="tab_software">软件</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_profile">我的</string>
+
+    <!-- 首页 -->
+    <string name="home_search_hint">搜索软件、游戏、工具</string>
+    <string name="home_notice">公告专区</string>
+    <string name="home_recommend">推荐软件</string>
+    <string name="home_more">更多</string>
+
+    <!-- 软件页 -->
+    <string name="software_rank">软件排行</string>
+    <string name="cat_all">全部</string>
+    <string name="cat_hot">热门</string>
+    <string name="cat_tool">工具</string>
+    <string name="cat_game">游戏</string>
+    <string name="cat_media">影音</string>
+    <string name="cat_edu">教育</string>
+
+    <!-- 发现页 -->
+    <string name="discover_title">发现</string>
+    <string name="discover_vip_parser">VIP解析器</string>
+    <string name="discover_player">全能播放器</string>
+    <string name="discover_vip_video">全网VIP影视</string>
+    <string name="discover_live">直播解析</string>
+    <string name="discover_news">每日早报</string>
+    <string name="discover_game">怀旧游戏</string>
+
+    <!-- 个人中心 -->
+    <string name="profile_title">个人中心</string>
+    <string name="profile_address">永久地址</string>
+    <string name="profile_business">商务联系</string>
+    <string name="profile_feedback">软件反馈</string>
+    <string name="profile_group">加入群聊</string>
+    <string name="profile_download">下载管理</string>
+    <string name="profile_share">分享软件</string>
+    <string name="profile_cache">清理缓存</string>
+    <string name="profile_about">关于我们</string>
+    <string name="profile_logout">退出登录</string>
+    <string name="profile_not_login">未登录</string>
+    <string name="profile_click_login">点击登录</string>
+
+    <!-- 详情页 -->
+    <string name="detail_download">立即下载</string>
+    <string name="detail_intro">软件介绍</string>
+    <string name="detail_notice">使用须知</string>
+    <string name="detail_recommend">应用推荐</string>
+    <string name="detail_share">分享</string>
+    <string name="detail_download_count">下载量</string>
+    <string name="detail_rating">评分</string>
+    <string name="detail_update">更新</string>
+
+    <!-- 登录注册 -->
+    <string name="login_tab">登录</string>
+    <string name="register_tab">注册</string>
+    <string name="hint_username">请输入用户名</string>
+    <string name="hint_password">请输入密码</string>
+    <string name="hint_phone">请输入手机号</string>
+    <string name="hint_email">请输入邮箱</string>
+    <string name="hint_set_username">请设置用户名</string>
+    <string name="hint_set_password">请设置密码</string>
+    <string name="btn_login">登 录</string>
+    <string name="btn_register">注 册</string>
+    <string name="btn_get_code">获取验证码</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="sms_login">短信登录</string>
+    <string name="login_agreement">登录/注册即表示同意《用户协议》和《隐私政策》</string>
+    <string name="welcome_back">欢迎回来，请登录您的账号</string>
+
+    <!-- 通用 -->
+    <string name="btn_download">下载</string>
+    <string name="btn_get">领取</string>
+    <string name="btn_sign">签到</string>
+    <string name="more_arrow">›</string>
+    <string name="loading">加载中…</string>
+    <string name="load_failed">加载失败</string>
+    <string name="retry">重试</string>
+    <string name="empty">暂无数据</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="download_success">下载完成</string>
+    <string name="download_start">开始下载</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="logout_success">已退出登录</string>
+
+    <!-- 菜单 -->
+    <string name="menu_home">首页</string>
+    <string name="menu_software">软件</string>
+    <string name="menu_discover">发现</string>
+    <string name="menu_profile">我的</string>
+</resources>

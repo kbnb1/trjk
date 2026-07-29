@@ -1,0 +1,3 @@
+// settings.gradle - 项目设置
+include ':app'
+rootProject.name = "软件库"

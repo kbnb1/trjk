@@ -1,0 +1,6 @@
+node_modules/
+.browsers/
+*.log
+.env
+/backend/uploads/*
+!/backend/uploads/.gitkeep

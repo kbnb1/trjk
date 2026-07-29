@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AndroidManifest.xml - 应用清单配置 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 存储读写权限（用于下载 APK 和图片缓存） -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SoftwareStore"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <!-- 启动页（带开屏广告） -->
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SoftwareStore.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 登录注册页 -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SoftwareStore.NoActionBar" />
+
+        <!-- 主 Activity（底部导航 + Fragment 切换） -->
+        <activity
+            android:name=".ui.common.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SoftwareStore.NoActionBar" />
+
+        <!-- 软件详情页 -->
+        <activity
+            android:name=".ui.detail.SoftwareDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SoftwareStore.NoActionBar" />
+    </application>
+
+</manifest>
