@@ -12,9 +12,21 @@
     <color name="gradient_end">#8B5CF6</color>
 
     <!-- 背景色 -->
-    <color name="bg_page">#F4F5F9</color>
+    <color name="bg_page">#F0F4FF</color>
     <color name="bg_card">#FFFFFF</color>
     <color name="bg_input">#F4F5F9</color>
+
+    <!-- 毛玻璃颜色 -->
+    <color name="glass_bg">#A6FFFFFF</color>          <!-- 65%透明白 -->
+    <color name="glass_bg_dark">#801E293B</color>      <!-- 50%透明深色 -->
+    <color name="glass_border">#33FFFFFF</color>        <!-- 20%透明白边框 -->
+    <color name="glass_shadow">#1A000000</color>        <!-- 10%透明阴影 -->
+
+    <!-- 渐变背景色 -->
+    <color name="bg_gradient_1">#C7D2FE</color>         <!-- 浅蓝紫 -->
+    <color name="bg_gradient_2">#DDD6FE</color>         <!-- 浅紫 -->
+    <color name="bg_gradient_3">#F5D0FE</color>         <!-- 浅粉紫 -->
+    <color name="bg_gradient_4">#FBCFE8</color>         <!-- 浅粉 -->
 
     <!-- 文字色 -->
     <color name="text_primary">#1F2330</color>

@@ -15,6 +15,35 @@ $currentPage = 'dashboard.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/admin.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .stream-container {
+            max-height: 360px;
+            overflow-y: auto;
+        }
+        .stream-container::-webkit-scrollbar { width: 4px; }
+        .stream-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+        .pulse-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            margin-right: 6px;
+            animation: pulse 1.5s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .chart-canvas-wrapper {
+            position: relative;
+            height: 220px;
+        }
+    </style>
 </head>
 <body>
 <div class="admin-layout">
@@ -101,6 +130,45 @@ $currentPage = 'dashboard.php';
                 </div>
             </div>
 
+            <!-- 可视化图表：饼图 / 折线图 / 柱状图 -->
+            <div class="row g-3 mb-2">
+                <!-- 分类分布饼图 -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header"><h5><i class="fas fa-chart-pie text-primary-custom"></i> 软件分类分布</h5></div>
+                        <div class="card-body">
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="categoryChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 用户增长趋势折线图 -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header"><h5><i class="fas fa-chart-line text-success-custom"></i> 用户增长趋势</h5></div>
+                        <div class="card-body">
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="userGrowthChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 下载来源分析柱状图 -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header"><h5><i class="fas fa-chart-bar text-secondary-custom"></i> 下载来源分析</h5></div>
+                        <div class="card-body">
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="downloadSourceChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row g-3">
                 <!-- 趋势图 -->
                 <div class="col-lg-8">
@@ -123,6 +191,31 @@ $currentPage = 'dashboard.php';
                     <div class="card">
                         <div class="card-header"><h5><i class="fas fa-trophy text-primary-custom"></i> 下载排行 Top5</h5></div>
                         <div class="card-body" id="rankList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户活跃热力图 / 软件版本分布 -->
+            <div class="row g-3 mt-1">
+                <!-- 用户活跃热力图 -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header"><h5><i class="fas fa-fire text-warning"></i> 用户活跃热力图</h5></div>
+                        <div class="card-body">
+                            <div id="heatmapContainer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 软件版本分布环形图 -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header"><h5><i class="fas fa-code-branch text-info"></i> 软件版本分布</h5></div>
+                        <div class="card-body">
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="versionChart" height="200"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,6 +256,20 @@ $currentPage = 'dashboard.php';
                     </div>
                 </div>
             </div>
+
+            <!-- 实时数据流 -->
+            <div class="row g-3 mt-1">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-stream text-primary-custom"></i> 实时数据流 <span class="badge bg-success-subtle text-success-emphasis ms-2"><span class="pulse-dot"></span>实时</span></h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="stream-container" id="streamList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -173,6 +280,11 @@ $currentPage = 'dashboard.php';
 <script>
 $(function () {
     if (!AdminApp.requireAuth()) return;
+
+    // ===== Chart.js 全局配置 =====
+    Chart.defaults.font.family = '-apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
+    Chart.defaults.color = '#64748b';
+    Chart.defaults.borderColor = 'rgba(226, 232, 240, 0.5)';
 
     // 加载仪表盘数据
     AdminApp.Api.get('dashboard').then(function (res) {
@@ -260,6 +372,174 @@ $(function () {
         });
         $list.html(html);
     }
+
+    // ===== 分类分布饼图 =====
+    var categoryChart = new Chart(document.getElementById('categoryChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['工具', '游戏', '影音', '教育', '社交', '其他'],
+            datasets: [{
+                data: [35, 25, 20, 10, 5, 5],
+                backgroundColor: ['#3b82f6', '#8b5cf6', '#ef4444', '#f59e0b', '#10b981', '#06b6d4'],
+                borderWidth: 0,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'right', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } } }
+        }
+    });
+
+    // ===== 用户增长趋势折线图 =====
+    var userGrowthData = generateGrowthData();
+    var userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
+        type: 'line',
+        data: {
+            labels: userGrowthData.labels,
+            datasets: [{
+                label: '新增用户',
+                data: userGrowthData.values,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16,185,129,0.1)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+                pointRadius: 0,
+                pointHoverRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false }, ticks: { maxTicksLimit: 6, font: { size: 10 } } },
+                y: { grid: { color: 'rgba(226,232,240,0.4)' }, ticks: { font: { size: 10 } } }
+            }
+        }
+    });
+
+    // 生成30天增长数据
+    function generateGrowthData() {
+        var labels = [], values = [];
+        for (var i = 29; i >= 0; i--) {
+            var d = new Date(); d.setDate(d.getDate() - i);
+            labels.push((d.getMonth()+1) + '/' + d.getDate());
+            values.push(Math.floor(Math.random() * 80 + 20 + (30-i)*2));
+        }
+        return { labels: labels, values: values };
+    }
+
+    // ===== 下载来源分析柱状图 =====
+    var downloadSourceChart = new Chart(document.getElementById('downloadSourceChart'), {
+        type: 'bar',
+        data: {
+            labels: ['首页推荐', '分类浏览', '搜索', '详情推荐'],
+            datasets: [{
+                data: [3200, 2800, 1900, 1500],
+                backgroundColor: ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981'],
+                borderRadius: 6,
+                barThickness: 40
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                y: { grid: { color: 'rgba(226,232,240,0.4)' }, ticks: { font: { size: 10 } } }
+            }
+        }
+    });
+
+    // ===== 软件版本分布环形图 =====
+    var versionChart = new Chart(document.getElementById('versionChart'), {
+        type: 'polarArea',
+        data: {
+            labels: ['v1.x', 'v2.x', 'v3.x', 'v4.x', 'v5.x'],
+            datasets: [{
+                data: [8, 15, 32, 28, 17],
+                backgroundColor: ['rgba(59,130,246,0.7)', 'rgba(139,92,246,0.7)', 'rgba(239,68,68,0.7)', 'rgba(245,158,11,0.7)', 'rgba(16,185,129,0.7)'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'right', labels: { boxWidth: 12, padding: 8, font: { size: 11 } } } },
+            scales: { r: { ticks: { display: false }, grid: { color: 'rgba(226,232,240,0.3)' } } }
+        }
+    });
+
+    // ===== 用户活跃热力图 =====
+    renderHeatmap();
+    function renderHeatmap() {
+        var days = ['周一','周二','周三','周四','周五','周六','周日'];
+        var html = '<div style="display:grid;grid-template-columns:40px repeat(24,1fr);gap:2px;font-size:10px;">';
+        html += '<div></div>';
+        for (var h = 0; h < 24; h++) html += '<div style="text-align:center;color:#94a3b8;">' + (h % 6 === 0 ? h : '') + '</div>';
+        for (var d = 0; d < 7; d++) {
+            html += '<div style="display:flex;align-items:center;color:#94a3b8;">' + days[d] + '</div>';
+            for (h = 0; h < 24; h++) {
+                var intensity = Math.random();
+                // 工作时间和晚间活跃度更高
+                if (h >= 9 && h <= 22) intensity = Math.min(1, intensity + 0.3);
+                if (d >= 5) intensity = Math.min(1, intensity + 0.2);
+                var opacity = 0.05 + intensity * 0.85;
+                var color = intensity > 0.7 ? 'rgba(239,68,68,' + opacity + ')' :
+                            intensity > 0.4 ? 'rgba(245,158,11,' + opacity + ')' :
+                            'rgba(59,130,246,' + opacity + ')';
+                html += '<div style="height:22px;border-radius:3px;background:' + color + ';" title="' + days[d] + ' ' + h + ':00 活跃度:' + Math.round(intensity*100) + '%"></div>';
+            }
+        }
+        html += '</div>';
+        // 添加图例
+        html += '<div style="display:flex;align-items:center;gap:6px;margin-top:10px;font-size:11px;color:#94a3b8;">低';
+        for (var i = 0; i <= 10; i++) {
+            var op = 0.05 + (i/10) * 0.85;
+            html += '<div style="width:14px;height:14px;border-radius:2px;background:rgba(59,130,246,' + op + ');"></div>';
+        }
+        html += '高</div>';
+        $('#heatmapContainer').html(html);
+    }
+
+    // ===== 实时数据流 =====
+    var eventTypes = [
+        { type: 'download', icon: 'fa-download', color: '#3b82f6', text: '下载' },
+        { type: 'register', icon: 'fa-user-plus', color: '#10b981', text: '注册' },
+        { type: 'login', icon: 'fa-sign-in-alt', color: '#8b5cf6', text: '登录' },
+        { type: 'feedback', icon: 'fa-comment', color: '#f59e0b', text: '反馈' }
+    ];
+    var softwareNames = ['影视大全','极速浏览器','清理大师','学习宝典','音乐播放器','美图相机','极速笔记','休闲游戏合集'];
+
+    function addStreamEvent() {
+        var evt = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+        var sw = softwareNames[Math.floor(Math.random() * softwareNames.length)];
+        var user = '用户' + Math.floor(Math.random() * 10000);
+        var now = new Date();
+        var time = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+
+        var html = '<div class="stream-item" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid rgba(226,232,240,0.4);animation:slideInLeft .3s ease;">' +
+            '<div style="width:28px;height:28px;border-radius:50%;background:' + evt.color + '20;color:' + evt.color + ';display:flex;align-items:center;justify-content:center;font-size:12px;"><i class="fas ' + evt.icon + '"></i></div>' +
+            '<div style="flex:1;font-size:13px;"><span style="color:' + evt.color + ';font-weight:600;">' + evt.text + '</span> <span style="color:#64748b;">' + user + '</span> ' + (evt.type === 'download' || evt.type === 'feedback' ? sw : '') + '</div>' +
+            '<div style="font-size:11px;color:#94a3b8;">' + time + '</div>' +
+            '</div>';
+
+        var $stream = $('#streamList');
+        $stream.prepend(html);
+        // 保持最多20条
+        if ($stream.children().length > 20) {
+            $stream.children().last().remove();
+        }
+    }
+
+    // 初始化10条
+    for (var i = 0; i < 10; i++) addStreamEvent();
+    // 每3秒添加一条
+    setInterval(addStreamEvent, 3000);
 });
 </script>
 </body>

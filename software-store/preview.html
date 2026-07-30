@@ -450,6 +450,12 @@
   .discover-cell .nm { font-size: 12.5px; font-weight: 600; color: var(--text); }
   .discover-cell .ds { font-size: 10.5px; color: var(--text-3); margin-top: 3px; }
 
+  /* 网络工具4列紧凑宫格 */
+  .discover-grid.net-grid { gap: 8px; padding: 12px 16px; }
+  .discover-grid.net-grid .discover-cell { padding: 12px 4px 10px; }
+  .discover-grid.net-grid .discover-cell .ic { width: 40px; height: 40px; margin-bottom: 7px; border-radius: 12px; font-size: 20px; }
+  .discover-grid.net-grid .discover-cell .nm { font-size: 11.5px; }
+
   .discover-banner {
     margin: 16px; border-radius: 18px; padding: 20px 18px; color: #fff;
     background: var(--grad);
@@ -964,6 +970,46 @@
               <div class="ic" style="background:linear-gradient(135deg,#ec4899,#db2777)">🕹</div>
               <div class="nm">怀旧游戏</div>
               <div class="ds">经典红白机</div>
+            </div>
+          </div>
+
+          <!-- 网络实用工具标题 -->
+          <div class="section-head">
+            <h2>🌐 网络实用工具</h2>
+          </div>
+          <!-- 网络工具宫格 -->
+          <div class="discover-grid net-grid" style="grid-template-columns:repeat(4,1fr);">
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">🌐</div>
+              <div class="nm">IP查询</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#10b981,#059669)">⚡</div>
+              <div class="nm">网速测试</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">📶</div>
+              <div class="nm">WiFi密码</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#f59e0b,#d97706)">📱</div>
+              <div class="nm">二维码</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#ef4444,#dc2626)">🔍</div>
+              <div class="nm">域名查询</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#ec4899,#db2777)">🔗</div>
+              <div class="nm">短链解析</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">📄</div>
+              <div class="nm">网页源码</div>
+            </div>
+            <div class="discover-cell">
+              <div class="ic" style="background:linear-gradient(135deg,#10b981,#059669)">🔐</div>
+              <div class="nm">加密解密</div>
             </div>
           </div>
 

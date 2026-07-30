@@ -6,7 +6,7 @@
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_page">
+    android:background="@drawable/bg_gradient_page">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,6 +32,8 @@
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
                 app:boxCornerRadiusTopStart="24dp"
+                app:boxStrokeColor="@color/glass_border"
+                app:boxBackgroundColor="@color/glass_bg"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -48,7 +50,7 @@
                 android:id="@+id/chip_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bg_card"
+                android:background="@color/glass_bg"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp"
                 app:singleLine="true"
@@ -87,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/bg_card"
-                android:elevation="4dp"
+                android:elevation="2dp"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView

@@ -5,7 +5,7 @@
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_page">
+    android:background="@drawable/bg_gradient_page">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,8 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/bg_search_bar"
-                android:elevation="4dp"
+                android:background="@drawable/bg_glass"
+                android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="14dp"
@@ -68,8 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="14dp"
-                android:background="@drawable/bg_search_bar"
-                android:elevation="4dp"
+                android:background="@drawable/bg_glass"
+                android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
@@ -137,8 +137,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:background="@drawable/bg_card"
-                android:elevation="4dp"
+                android:background="@drawable/bg_glass"
+                android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -254,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/bg_card"
-                android:elevation="4dp"
+                android:elevation="2dp"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView

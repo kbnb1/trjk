@@ -38,6 +38,14 @@
     <string name="discover_live">直播解析</string>
     <string name="discover_news">每日早报</string>
     <string name="discover_game">怀旧游戏</string>
+    <string name="discover_ip_query">IP查询</string>
+    <string name="discover_speed_test">网速测试</string>
+    <string name="discover_wifi">WiFi密码</string>
+    <string name="discover_qrcode">二维码</string>
+    <string name="discover_whois">域名查询</string>
+    <string name="discover_short_url">短链解析</string>
+    <string name="discover_source">网页源码</string>
+    <string name="discover_crypto">加密解密</string>
 
     <!-- 个人中心 -->
     <string name="profile_title">个人中心</string>

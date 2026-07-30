@@ -48,6 +48,24 @@ public class DiscoverFragment extends Fragment {
         view.findViewById(R.id.cell_game).setOnClickListener(v ->
                 ToastUtils.showShort(R.string.discover_game));
 
+        // 网络实用工具
+        view.findViewById(R.id.cell_ip_query).setOnClickListener(v ->
+                ToastUtils.showShort("IP查询"));
+        view.findViewById(R.id.cell_speed_test).setOnClickListener(v ->
+                ToastUtils.showShort("网速测试"));
+        view.findViewById(R.id.cell_wifi).setOnClickListener(v ->
+                ToastUtils.showShort("WiFi密码查看"));
+        view.findViewById(R.id.cell_qrcode).setOnClickListener(v ->
+                ToastUtils.showShort("二维码生成"));
+        view.findViewById(R.id.cell_whois).setOnClickListener(v ->
+                ToastUtils.showShort("域名Whois查询"));
+        view.findViewById(R.id.cell_short_url).setOnClickListener(v ->
+                ToastUtils.showShort("短链接解析"));
+        view.findViewById(R.id.cell_source).setOnClickListener(v ->
+                ToastUtils.showShort("网页源码查看"));
+        view.findViewById(R.id.cell_crypto).setOnClickListener(v ->
+                ToastUtils.showShort("加密解密工具"));
+
         // VIP 会员横幅
         view.findViewById(R.id.vip_banner).setOnClickListener(v ->
                 ToastUtils.showShort("开通 VIP 会员"));

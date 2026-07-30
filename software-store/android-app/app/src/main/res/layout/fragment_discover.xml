@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_page"
+    android:background="@drawable/bg_gradient_page"
     android:fillViewport="true">
 
     <LinearLayout
@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="6dp"
-            android:background="@drawable/bg_card"
-            android:elevation="4dp"
+            android:background="@drawable/bg_glass"
+            android:elevation="2dp"
             android:padding="8dp"
             app:columnCount="3"
             app:rowCount="2"
@@ -270,6 +270,255 @@
             </LinearLayout>
         </androidx.gridlayout.widget.GridLayout>
 
+        <!-- 网络实用工具标题 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="10dp"
+            android:text="🌐 网络实用工具"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- 网络工具宫格 -->
+        <androidx.gridlayout.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_glass"
+            android:elevation="2dp"
+            android:padding="8dp"
+            app:columnCount="4"
+            app:rowCount="2"
+            app:useDefaultMargins="true">
+
+            <!-- IP查询 -->
+            <LinearLayout
+                android:id="@+id/cell_ip_query"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_blue"
+                    android:gravity="center"
+                    android:text="🌐"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="IP查询"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 网速测试 -->
+            <LinearLayout
+                android:id="@+id/cell_speed_test"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_green"
+                    android:gravity="center"
+                    android:text="⚡"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="网速测试"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- WiFi密码 -->
+            <LinearLayout
+                android:id="@+id/cell_wifi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_purple"
+                    android:gravity="center"
+                    android:text="📶"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="WiFi密码"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 二维码生成 -->
+            <LinearLayout
+                android:id="@+id/cell_qrcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_orange"
+                    android:gravity="center"
+                    android:text="📱"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="二维码"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 域名Whois -->
+            <LinearLayout
+                android:id="@+id/cell_whois"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_red"
+                    android:gravity="center"
+                    android:text="🔍"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="域名查询"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 短链解析 -->
+            <LinearLayout
+                android:id="@+id/cell_short_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_pink"
+                    android:gravity="center"
+                    android:text="🔗"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="短链解析"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 网页源码 -->
+            <LinearLayout
+                android:id="@+id/cell_source"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_blue"
+                    android:gravity="center"
+                    android:text="📄"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="网页源码"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 加密解密 -->
+            <LinearLayout
+                android:id="@+id/cell_crypto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="12dp"
+                app:layout_columnWeight="1">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_green"
+                    android:gravity="center"
+                    android:text="🔐"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="加密解密"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.gridlayout.widget.GridLayout>
+
         <!-- VIP 会员横幅 -->
         <LinearLayout
             android:id="@+id/vip_banner"
@@ -278,7 +527,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_gradient_header"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:orientation="vertical"
             android:paddingHorizontal="18dp"
             android:paddingVertical="20dp">
@@ -318,8 +567,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_card"
-            android:elevation="4dp"
+            android:background="@drawable/bg_glass"
+            android:elevation="2dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="14dp">
@@ -371,8 +620,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_card"
-            android:elevation="4dp"
+            android:background="@drawable/bg_glass"
+            android:elevation="2dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="14dp">
