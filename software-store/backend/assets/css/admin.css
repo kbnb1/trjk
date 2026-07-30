@@ -39,7 +39,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--content-bg);
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff0f6 100%);
+    background-attachment: fixed;
     color: var(--text-dark);
     font-size: 14px;
     line-height: 1.6;
@@ -54,12 +55,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
     padding: 20px;
 }
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .login-card {
-    background: #fff;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
     border-radius: 16px;
     box-shadow: var(--shadow-lg);
     width: 100%;
@@ -164,7 +176,9 @@ body {
 /* 侧边栏 */
 .sidebar {
     width: var(--sidebar-width);
-    background: var(--sidebar-bg);
+    background: rgba(30,41,59,0.85);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
     color: #cbd5e1;
     position: fixed;
     top: 0;
@@ -175,6 +189,7 @@ body {
     flex-direction: column;
     transition: transform .25s ease;
     overflow-y: auto;
+    border-right: 1px solid rgba(255,255,255,0.06);
 }
 
 .sidebar-brand {
@@ -239,8 +254,9 @@ body {
 }
 
 .sidebar-menu .menu-item a:hover {
-    background: var(--sidebar-hover);
+    background: rgba(255, 255, 255, 0.12);
     color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .sidebar-menu .menu-item.active a {
@@ -270,7 +286,10 @@ body {
 /* 顶部导航栏 */
 .topbar {
     height: var(--topbar-height);
-    background: #fff;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
@@ -394,8 +413,10 @@ body {
  * 卡片
  * ============================================================ */
 .card {
-    background: var(--card-bg);
-    border: none;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     margin-bottom: 20px;
@@ -423,7 +444,9 @@ body {
 
 /* 统计卡片 */
 .stat-card {
-    background: var(--card-bg);
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
     border-radius: var(--radius);
     padding: 20px;
     box-shadow: var(--shadow-sm);
@@ -431,12 +454,13 @@ body {
     align-items: center;
     gap: 16px;
     transition: transform .2s, box-shadow .2s;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .stat-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow);
+    background: rgba(255,255,255,0.85);
 }
 
 .stat-icon {
@@ -484,7 +508,9 @@ body {
 }
 
 .data-table thead th {
-    background: #f8fafc;
+    background: rgba(248, 250, 252, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
     font-weight: 600;
     font-size: 13px;
@@ -504,7 +530,7 @@ body {
 }
 
 .data-table tbody tr:hover {
-    background: #f8fafc;
+    background: rgba(59, 130, 246, 0.08);
 }
 
 /* 软件图标/缩略图 */
@@ -567,6 +593,11 @@ body {
     font-size: 13px;
     padding: 7px 14px;
     transition: all .15s;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .btn-sm {
@@ -617,6 +648,11 @@ body {
     border-radius: 6px;
     font-size: 13px;
     padding: 8px 12px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color .15s, box-shadow .15s, background .15s;
 }
 
 .form-control:focus, .form-select:focus {
@@ -669,7 +705,10 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 14px 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
 }
 
 .pagination-info {
@@ -683,11 +722,15 @@ body {
 }
 
 .pagination .page-link {
-    border: none;
+    border: 1px solid rgba(255,255,255,0.3);
     color: var(--text-muted);
     border-radius: 6px !important;
     font-size: 13px;
     padding: 6px 12px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    transition: all .15s;
 }
 
 .pagination .page-item.active .page-link {
@@ -709,6 +752,12 @@ body {
     gap: 12px;
     align-items: center;
     margin-bottom: 20px;
+    padding: 16px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius);
 }
 
 .filter-bar .search-input {
@@ -759,7 +808,10 @@ body {
 }
 
 .toast-item {
-    background: #fff;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
     border-radius: 8px;
     box-shadow: var(--shadow-lg);
     padding: 14px 18px;

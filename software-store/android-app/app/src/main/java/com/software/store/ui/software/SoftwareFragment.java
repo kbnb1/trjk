@@ -1,6 +1,8 @@
 package com.software.store.ui.software;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputEditText;
 import com.software.store.R;
 import com.software.store.adapter.SoftwareAdapter;
 import com.software.store.data.model.Software;
@@ -31,8 +34,12 @@ public class SoftwareFragment extends Fragment {
     private SwipeRefreshLayout refreshLayout;
     private ChipGroup chipGroup;
     private RecyclerView rvRank;
+    private TextInputEditText etSearch;
 
     private SoftwareAdapter softwareAdapter;
+
+    /** 原始数据列表，保存所有软件，用于搜索过滤 */
+    private final List<Software> fullList = new ArrayList<>();
 
     /** 当前选中的分类 ID */
     private int currentCategoryId = 0;
@@ -58,6 +65,25 @@ public class SoftwareFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.refresh_layout);
         chipGroup = view.findViewById(R.id.chip_group);
         rvRank = view.findViewById(R.id.rv_rank);
+        etSearch = view.findViewById(R.id.et_search);
+
+        // 搜索框文字变化监听
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // 无需处理
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // 无需处理
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterList(s != null ? s.toString() : "");
+            }
+        });
 
         // 分类 Chip
         String[] categories = {"全部", "热门", "工具", "游戏", "影音", "教育"};
@@ -109,8 +135,46 @@ public class SoftwareFragment extends Fragment {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setRank(i + 1);
         }
-        softwareAdapter.setList(list);
+
+        // 保存原始数据，用于搜索过滤
+        fullList.clear();
+        fullList.addAll(list);
+
+        // 应用当前搜索关键字
+        String keyword = etSearch != null && etSearch.getText() != null
+                ? etSearch.getText().toString() : "";
+        filterList(keyword);
         refreshLayout.setRefreshing(false);
+    }
+
+    /**
+     * 根据关键字过滤列表
+     * 匹配软件名称和描述，关键字为空时显示全部
+     *
+     * @param keyword 搜索关键字
+     */
+    private void filterList(String keyword) {
+        List<Software> filtered = new ArrayList<>();
+        if (keyword == null || keyword.trim().isEmpty()) {
+            // 关键字为空，显示全部
+            filtered.addAll(fullList);
+        } else {
+            String key = keyword.trim().toLowerCase();
+            for (Software software : fullList) {
+                String name = software.getName() != null
+                        ? software.getName().toLowerCase() : "";
+                String desc = software.getDescription() != null
+                        ? software.getDescription().toLowerCase() : "";
+                if (name.contains(key) || desc.contains(key)) {
+                    filtered.add(software);
+                }
+            }
+            // 重新设置过滤后的排名序号
+            for (int i = 0; i < filtered.size(); i++) {
+                filtered.get(i).setRank(i + 1);
+            }
+        }
+        softwareAdapter.setList(filtered);
     }
 
     /**

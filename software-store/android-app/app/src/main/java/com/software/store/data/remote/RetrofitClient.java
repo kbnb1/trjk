@@ -72,13 +72,34 @@ public class RetrofitClient {
             return chain.proceed(builder.build());
         };
 
+        // 请求签名拦截器：防止API被抓包篡改
+        okhttp3.Interceptor signInterceptor = chain -> {
+            okhttp3.Request original = chain.request();
+            long timestamp = System.currentTimeMillis() / 1000;
+            String sign = generateSignature(original.url().toString(), timestamp);
+
+            okhttp3.Request signedRequest = original.newBuilder()
+                    .header("X-Timestamp", String.valueOf(timestamp))
+                    .header("X-Signature", sign)
+                    .header("X-App-Version", String.valueOf(android.os.Build.VERSION.SDK_INT))
+                    .build();
+            return chain.proceed(signedRequest);
+        };
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(tokenInterceptor)
+                .addInterceptor(signInterceptor)
                 .addInterceptor(loggingInterceptor)
                 .retryOnConnectionFailure(true)
+                // 证书锁定（Certificate Pinning）：防止中间人攻击。
+                // 启用时取消下方注释并替换为服务器证书的 SHA-256 公钥哈希：
+                // .certificatePinner(new okhttp3.CertificatePinner.Builder()
+                //         .add("api.softwarestore.com",
+                //                 "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
+                //         .build())
                 .build();
 
         retrofit = new Retrofit.Builder()
@@ -128,5 +149,31 @@ public class RetrofitClient {
      */
     public void clearToken() {
         this.token = null;
+    }
+
+    /**
+     * 生成请求签名
+     * 使用HMAC-SHA256对URL和时间戳进行签名
+     *
+     * @param url       请求URL
+     * @param timestamp 时间戳（秒）
+     * @return 签名摘要的十六进制字符串
+     */
+    private String generateSignature(String url, long timestamp) {
+        try {
+            String data = url + timestamp;
+            javax.crypto.Mac mac = javax.crypto.Mac.getInstance("HmacSHA256");
+            // 密钥应从Native层获取或动态生成，此处使用固定值作为示例
+            String secret = "sw_store_secret_key_2026";
+            mac.init(new javax.crypto.spec.SecretKeySpec(secret.getBytes(), "HmacSHA256"));
+            byte[] hash = mac.doFinal(data.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

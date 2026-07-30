@@ -3,21 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>软件库 App 高保真预览</title>
+<title>软件库 App · 毛玻璃风格预览</title>
 <style>
   /* ============ 全局重置与变量 ============ */
   :root {
-    --primary: #3b82f6;
+    --primary: #6366f1;
     --secondary: #8b5cf6;
-    --grad: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    --grad-soft: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.12) 100%);
-    --bg: #f4f5f9;
-    --card: #ffffff;
+    --accent: #ec4899;
+    --grad: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    --grad-soft: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.18) 50%, rgba(236,72,153,0.18) 100%);
+
+    /* —— 毛玻璃参数 —— */
+    --glass-bg: rgba(255,255,255,0.65);
+    --glass-bg-strong: rgba(255,255,255,0.78);
+    --glass-bg-light: rgba(255,255,255,0.4);
+    --glass-bg-soft: rgba(255,255,255,0.28);
+    --glass-blur: blur(20px) saturate(180%);
+    --glass-blur-light: blur(12px) saturate(160%);
+    --glass-border: 1px solid rgba(255,255,255,0.3);
+    --glass-border-strong: 1px solid rgba(255,255,255,0.45);
+    --glass-shadow: 0 8px 32px rgba(31,38,80,0.12);
+    --glass-shadow-lg: 0 12px 40px rgba(31,38,80,0.18);
+    --glass-inset: inset 0 1px 1px rgba(255,255,255,0.5);
+
     --text: #1f2330;
-    --text-2: #6b7280;
-    --text-3: #9ca3af;
-    --line: #eceef3;
-    --shadow: 0 8px 28px rgba(31, 35, 48, 0.08);
+    --text-2: #4b5563;
+    --text-3: #6b7280;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; }
@@ -37,12 +48,7 @@
   }
 
   /* ============ 舞台与手机外框 ============ */
-  .stage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 18px; }
   .phone {
     position: relative;
     width: 375px;
@@ -55,305 +61,255 @@
       0 0 0 2px #2a2d36,
       inset 0 0 0 2px #0a0c10;
   }
-  .phone::before { /* 侧键 */
-    content: "";
-    position: absolute;
-    left: -3px;
-    top: 150px;
-    width: 3px;
-    height: 60px;
-    background: #2a2d36;
-    border-radius: 3px 0 0 3px;
+  .phone::before {
+    content: ""; position: absolute; left: -3px; top: 150px;
+    width: 3px; height: 60px; background: #2a2d36; border-radius: 3px 0 0 3px;
     box-shadow: 0 80px 0 #2a2d36, 0 -90px 0 #2a2d36;
   }
-  .phone::after { /* 音量键 */
-    content: "";
-    position: absolute;
-    right: -3px;
-    top: 130px;
-    width: 3px;
-    height: 90px;
-    background: #2a2d36;
-    border-radius: 0 3px 3px 0;
+  .phone::after {
+    content: ""; position: absolute; right: -3px; top: 130px;
+    width: 3px; height: 90px; background: #2a2d36; border-radius: 0 3px 3px 0;
   }
   .screen {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     border-radius: 36px;
     overflow: hidden;
-    background: var(--bg);
+    /* 多彩渐变背景：蓝紫粉，让毛玻璃有背景可透 */
+    background: linear-gradient(135deg, #c7d2fe 0%, #ddd6fe 30%, #f5d0fe 65%, #fbcfe8 100%);
+  }
+  /* 背景彩色光斑（毛玻璃模糊源） */
+  .screen::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(99,102,241,0.55), transparent 42%),
+      radial-gradient(circle at 88% 22%, rgba(236,72,153,0.5), transparent 42%),
+      radial-gradient(circle at 78% 82%, rgba(139,92,246,0.5), transparent 42%),
+      radial-gradient(circle at 12% 86%, rgba(56,189,248,0.45), transparent 42%);
+    z-index: 0;
+    pointer-events: none;
   }
   /* 灵动岛 / 刘海 */
   .notch {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 28px;
-    background: #000;
-    border-radius: 20px;
-    z-index: 50;
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 28px; background: #000; border-radius: 20px; z-index: 50;
   }
-  /* 状态栏 */
   .statusbar {
-    position: relative;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: relative; height: 44px;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 0 24px 0 22px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    z-index: 40;
+    font-size: 14px; font-weight: 600; color: var(--text); z-index: 40;
   }
   .statusbar .icons { display: flex; gap: 6px; align-items: center; }
   .statusbar .icons svg { width: 16px; height: 16px; }
 
   /* ============ 页面通用 ============ */
   .page {
-    position: absolute;
-    inset: 0;
-    display: none;
-    flex-direction: column;
-    background: var(--bg);
+    position: absolute; inset: 0;
+    display: none; flex-direction: column;
+    background: transparent;
+    z-index: 1;
     animation: fadeIn .35s ease;
   }
   .page.active { display: flex; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
 
-  .scroll {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-bottom: 16px;
-  }
+  .scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 16px; position: relative; z-index: 2; }
   .scroll::-webkit-scrollbar { display: none; }
 
-  /* 底部 Home 指示条 */
   .home-indicator {
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 130px;
-    height: 5px;
-    background: rgba(0,0,0,0.35);
-    border-radius: 3px;
-    z-index: 60;
+    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+    width: 130px; height: 5px; background: rgba(0,0,0,0.3); border-radius: 3px; z-index: 60;
   }
 
   /* ============ 底部切换按钮 ============ */
-  .switcher {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    max-width: 560px;
-  }
+  .switcher { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 560px; }
   .switcher button {
-    border: none;
+    border: 1px solid rgba(255,255,255,0.18);
     background: rgba(255,255,255,0.08);
     color: #cdd2dc;
-    padding: 9px 14px;
-    border-radius: 999px;
-    font-size: 12.5px;
-    cursor: pointer;
-    transition: all .2s;
-    backdrop-filter: blur(6px);
+    padding: 9px 14px; border-radius: 999px;
+    font-size: 12.5px; cursor: pointer; transition: all .2s;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
   .switcher button:hover { background: rgba(255,255,255,0.16); }
   .switcher button.active {
-    background: var(--grad);
-    color: #fff;
+    background: var(--grad); color: #fff; border-color: transparent;
     box-shadow: 0 6px 18px rgba(99,102,241,0.45);
+  }
+
+  /* ============ 毛玻璃通用类 ============ */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
   }
 
   /* ============ 组件库 ============ */
   .topbar {
     height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 0 16px;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: var(--glass-border);
+    position: relative; z-index: 3;
   }
   .topbar h1 { font-size: 17px; font-weight: 700; }
   .icon-btn {
-    width: 36px; height: 36px;
-    border-radius: 50%;
+    width: 36px; height: 36px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: #f3f4f8;
-    font-size: 16px;
-    cursor: pointer;
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: var(--glass-border);
+    font-size: 16px; cursor: pointer;
   }
   .search-bar {
     display: flex; align-items: center; gap: 8px;
-    background: #fff;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
     margin: 12px 16px 0;
     padding: 10px 14px;
     border-radius: 14px;
-    box-shadow: var(--shadow);
   }
   .search-bar input {
     border: none; outline: none; flex: 1;
     font-size: 14px; background: transparent; color: var(--text);
   }
-  .search-bar .ph { color: var(--text-3); }
+  .search-bar input::placeholder { color: var(--text-3); }
 
   .app-icon {
-    width: 56px; height: 56px;
-    border-radius: 16px;
+    width: 56px; height: 56px; border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px;
-    color: #fff;
-    flex-shrink: 0;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    font-size: 28px; color: #fff; flex-shrink: 0;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
   }
   .btn-grad {
     background: var(--grad);
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
+    color: #fff; border: 1px solid rgba(255,255,255,0.35);
+    padding: 8px 16px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     box-shadow: 0 6px 14px rgba(99,102,241,0.35);
   }
   .btn-outline {
-    background: #fff;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
     color: var(--primary);
-    border: 1.5px solid var(--primary);
-    padding: 7px 15px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
+    border: 1.5px solid rgba(99,102,241,0.5);
+    padding: 7px 15px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
   }
 
   /* ============ 启动页 ============ */
   .page-splash {
-    background: var(--grad);
-    align-items: center;
-    justify-content: space-between;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #ec4899 100%);
+    align-items: center; justify-content: space-between;
     padding: 80px 24px 40px;
   }
+  .page-splash::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 18%, rgba(255,255,255,0.25), transparent 45%),
+      radial-gradient(circle at 12% 88%, rgba(255,255,255,0.18), transparent 45%);
+    pointer-events: none;
+  }
   .splash-logo {
-    width: 110px; height: 110px;
-    border-radius: 30px;
-    background: rgba(255,255,255,0.16);
-    backdrop-filter: blur(10px);
+    width: 110px; height: 110px; border-radius: 30px;
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow-lg), var(--glass-inset);
     display: flex; align-items: center; justify-content: center;
     font-size: 60px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     animation: pop .8s cubic-bezier(.2,.9,.3,1.4);
   }
   @keyframes pop { 0% { transform: scale(.4); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
   .splash-name {
-    color: #fff;
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    margin-top: 22px;
-    animation: rise .8s .2s both;
+    color: #fff; font-size: 30px; font-weight: 800; letter-spacing: 4px;
+    margin-top: 22px; animation: rise .8s .2s both;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
   .splash-slogan {
-    color: rgba(255,255,255,0.85);
-    font-size: 13px;
-    margin-top: 8px;
-    letter-spacing: 1px;
-    animation: rise .8s .35s both;
+    color: rgba(255,255,255,0.9); font-size: 13px; margin-top: 8px;
+    letter-spacing: 1px; animation: rise .8s .35s both;
   }
   @keyframes rise { from { opacity:0; transform: translateY(14px);} to {opacity:1; transform:none;} }
   .splash-ad {
-    width: 100%;
-    border: 2px dashed rgba(255,255,255,0.5);
-    border-radius: 18px;
-    padding: 26px 16px;
-    text-align: center;
-    color: rgba(255,255,255,0.9);
-    background: rgba(255,255,255,0.06);
+    width: 100%; border-radius: 18px; padding: 26px 16px; text-align: center;
+    color: #fff;
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow-lg);
   }
-  .splash-ad .lab { font-size: 12px; opacity: .8; letter-spacing: 2px; }
+  .splash-ad .lab { font-size: 12px; opacity: .85; letter-spacing: 2px; }
   .splash-ad .txt { font-size: 16px; margin-top: 6px; font-weight: 600; }
   .splash-count {
-    position: absolute;
-    top: 60px; right: 24px;
-    background: rgba(0,0,0,0.35);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 999px;
+    position: absolute; top: 60px; right: 24px;
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    color: #fff; padding: 6px 14px; border-radius: 999px;
     font-size: 12px;
-    backdrop-filter: blur(8px);
   }
   .splash-count b { font-size: 14px; }
 
   /* ============ 首页 ============ */
   .carousel {
     margin: 14px 16px 0;
-    height: 150px;
-    border-radius: 18px;
+    height: 150px; border-radius: 18px;
     background: var(--grad);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 12px 26px rgba(99,102,241,0.3);
-    display: flex;
-    align-items: flex-end;
-    padding: 16px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 12px 26px rgba(99,102,241,0.35);
+    border: var(--glass-border);
+    display: flex; align-items: flex-end; padding: 16px;
   }
   .carousel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; position: absolute; inset: 0;
     background:
-      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25), transparent 50%),
-      radial-gradient(circle at 10% 90%, rgba(255,255,255,0.15), transparent 50%);
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.3), transparent 50%),
+      radial-gradient(circle at 10% 90%, rgba(255,255,255,0.18), transparent 50%);
   }
-  .carousel .ct {
-    position: relative;
-    color: #fff;
-  }
-  .carousel .ct .tag { font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 999px; display: inline-block; }
+  .carousel .ct { position: relative; color: #fff; }
+  .carousel .ct .tag { font-size: 11px; background: rgba(255,255,255,0.3); padding: 3px 10px; border-radius: 999px; display: inline-block; }
   .carousel .ct h3 { font-size: 18px; margin-top: 8px; font-weight: 700; }
-  .carousel .ct p { font-size: 12px; opacity: .9; margin-top: 4px; }
+  .carousel .ct p { font-size: 12px; opacity: .95; margin-top: 4px; }
   .carousel .dots { position: absolute; bottom: 10px; right: 14px; display: flex; gap: 4px; }
-  .carousel .dots i { width: 6px; height: 6px; background: rgba(255,255,255,0.45); border-radius: 50%; }
+  .carousel .dots i { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
   .carousel .dots i.on { width: 16px; border-radius: 3px; background: #fff; }
 
   .notice-roll {
     margin: 14px 16px 0;
-    background: #fff;
-    border-radius: 14px;
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 14px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px; overflow: hidden;
   }
   .notice-roll .horn {
-    width: 28px; height: 28px;
-    border-radius: 8px;
+    width: 28px; height: 28px; border-radius: 8px;
     background: var(--grad-soft);
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
+    font-size: 14px; flex-shrink: 0;
   }
-  .notice-roll .track {
-    flex: 1;
-    overflow: hidden;
-    height: 20px;
-    position: relative;
-  }
+  .notice-roll .track { flex: 1; overflow: hidden; height: 20px; position: relative; }
   .notice-roll .track .line {
-    position: absolute;
-    white-space: nowrap;
-    font-size: 13px;
-    color: var(--text-2);
+    position: absolute; white-space: nowrap;
+    font-size: 13px; color: var(--text-2);
     animation: roll 12s linear infinite;
   }
   @keyframes roll {
@@ -369,75 +325,91 @@
     padding: 18px 16px 10px;
   }
   .section-head h2 { font-size: 16px; font-weight: 700; }
-  .section-head .more { font-size: 12px; color: var(--text-3); display: flex; align-items: center; gap: 2px; }
+  .section-head .more { font-size: 12px; color: var(--text-2); display: flex; align-items: center; gap: 2px; }
 
   .notice-list { padding: 0 16px; display: flex; flex-direction: column; gap: 10px; }
   .notice-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex; gap: 12px;
-    align-items: center;
-    box-shadow: var(--shadow);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 12px; padding: 12px;
+    display: flex; gap: 12px; align-items: center;
   }
   .notice-item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
   .notice-item .nt { flex: 1; }
   .notice-item .nt .t { font-size: 13.5px; font-weight: 600; color: var(--text); }
   .notice-item .nt .d { font-size: 11.5px; color: var(--text-3); margin-top: 3px; }
 
-  .app-row {
-    display: flex; gap: 12px;
-    align-items: center;
-    padding: 12px 16px;
-  }
-  .app-row + .app-row { border-top: 1px solid var(--line); }
+  .app-row { display: flex; gap: 12px; align-items: center; padding: 12px 16px; }
+  .app-row + .app-row { border-top: 1px solid rgba(255,255,255,0.4); }
   .app-row .info { flex: 1; min-width: 0; }
   .app-row .info .name { font-size: 14.5px; font-weight: 600; }
   .app-row .info .desc { font-size: 12px; color: var(--text-2); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .app-row .info .meta { font-size: 11px; color: var(--text-3); margin-top: 4px; }
   .card {
-    background: #fff;
-    border-radius: 16px;
-    margin: 0 16px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px; margin: 0 16px; overflow: hidden;
   }
 
   /* ============ 软件页 ============ */
+  .sw-search {
+    display: flex; align-items: center; gap: 8px;
+    margin: 12px 16px 6px;
+    padding: 10px 14px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 14px;
+  }
+  .sw-search .ic { color: var(--text-3); font-size: 14px; flex-shrink: 0; }
+  .sw-search input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-size: 14px; color: var(--text);
+  }
+  .sw-search input::placeholder { color: var(--text-3); }
+  .sw-search .clear {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(99,102,241,0.25); color: var(--primary);
+    display: none; align-items: center; justify-content: center;
+    font-size: 11px; cursor: pointer; flex-shrink: 0;
+  }
+  .sw-search .clear.show { display: flex; }
+
   .tabs {
-    display: flex;
-    gap: 6px;
-    padding: 12px 16px;
+    display: flex; gap: 6px; padding: 8px 16px 12px;
     overflow-x: auto;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: var(--glass-border);
+    position: relative; z-index: 3;
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs .tab {
-    flex-shrink: 0;
-    padding: 7px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    color: var(--text-2);
-    background: #f3f4f8;
-    cursor: pointer;
-    transition: all .2s;
+    flex-shrink: 0; padding: 7px 16px; border-radius: 999px;
+    font-size: 13px; color: var(--text-2);
+    background: rgba(255,255,255,0.45);
+    border: var(--glass-border);
+    cursor: pointer; transition: all .2s;
   }
-  .tabs .tab.active { background: var(--grad); color: #fff; box-shadow: 0 6px 14px rgba(99,102,241,0.35); }
+  .tabs .tab.active {
+    background: var(--grad); color: #fff; border-color: transparent;
+    box-shadow: 0 6px 14px rgba(99,102,241,0.4);
+  }
 
   .rank-item {
-    display: flex; gap: 12px;
-    align-items: center;
-    padding: 14px 16px;
-    background: #fff;
+    display: flex; gap: 12px; align-items: center; padding: 14px 16px;
   }
-  .rank-item + .rank-item { border-top: 1px solid var(--line); }
-  .rank-num {
-    width: 24px; text-align: center;
-    font-size: 16px; font-weight: 800;
-    color: var(--text-3);
-    flex-shrink: 0;
-  }
+  .rank-item + .rank-item { border-top: 1px solid rgba(255,255,255,0.4); }
+  .rank-num { width: 24px; text-align: center; font-size: 16px; font-weight: 800; color: var(--text-3); flex-shrink: 0; }
   .rank-num.top1 { color: #ef4444; }
   .rank-num.top2 { color: #f59e0b; }
   .rank-num.top3 { color: #eab308; }
@@ -446,155 +418,159 @@
   .rank-item .info .desc { font-size: 12px; color: var(--text-2); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .rank-item .info .meta { font-size: 11px; color: var(--text-3); margin-top: 4px; }
   .rank-item .dl { font-size: 11px; color: var(--text-3); }
+  .sw-empty {
+    margin: 30px 16px; text-align: center; padding: 30px 16px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: var(--glass-border); border-radius: 16px;
+    color: var(--text-3); font-size: 13px; display: none;
+  }
+  .sw-empty .em { font-size: 30px; display: block; margin-bottom: 8px; }
 
   /* ============ 发现页 ============ */
   .discover-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding: 18px 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 18px 16px;
   }
   .discover-cell {
-    background: #fff;
-    border-radius: 16px;
-    padding: 18px 8px 14px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: transform .2s;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px; padding: 18px 8px 14px; text-align: center;
+    cursor: pointer; transition: transform .2s;
   }
   .discover-cell:hover { transform: translateY(-3px); }
   .discover-cell .ic {
-    width: 48px; height: 48px;
-    margin: 0 auto 10px;
-    border-radius: 14px;
+    width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    color: #fff;
+    font-size: 24px; color: #fff;
   }
   .discover-cell .nm { font-size: 12.5px; font-weight: 600; color: var(--text); }
   .discover-cell .ds { font-size: 10.5px; color: var(--text-3); margin-top: 3px; }
 
   .discover-banner {
-    margin: 16px;
-    border-radius: 18px;
-    padding: 20px 18px;
-    color: #fff;
+    margin: 16px; border-radius: 18px; padding: 20px 18px; color: #fff;
     background: var(--grad);
-    box-shadow: 0 12px 26px rgba(99,102,241,0.3);
-    position: relative;
-    overflow: hidden;
+    border: var(--glass-border);
+    box-shadow: 0 12px 26px rgba(99,102,241,0.4);
+    position: relative; overflow: hidden;
   }
   .discover-banner::after {
-    content: "🎁";
-    position: absolute;
-    right: 18px; top: 50%;
-    transform: translateY(-50%);
-    font-size: 44px;
-    opacity: .9;
+    content: "🎁"; position: absolute; right: 18px; top: 50%;
+    transform: translateY(-50%); font-size: 44px; opacity: .9;
   }
   .discover-banner h3 { font-size: 17px; font-weight: 700; }
-  .discover-banner p { font-size: 12px; opacity: .9; margin-top: 6px; max-width: 70%; }
+  .discover-banner p { font-size: 12px; opacity: .95; margin-top: 6px; max-width: 70%; }
+
+  .discover-act {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 14px; padding: 14px;
+    display: flex; gap: 12px; align-items: center;
+  }
 
   /* ============ 个人中心 ============ */
   .profile-header {
     background: var(--grad);
-    padding: 20px 20px 60px;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
+    padding: 20px 20px 60px; color: #fff;
+    position: relative; overflow: hidden;
+    border-bottom: var(--glass-border);
   }
   .profile-header::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; position: absolute; inset: 0;
     background:
-      radial-gradient(circle at 90% 10%, rgba(255,255,255,0.2), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(255,255,255,0.25), transparent 40%),
       radial-gradient(circle at 0% 100%, rgba(255,255,255,0.15), transparent 50%);
+    pointer-events: none;
   }
   .profile-header .top { display: flex; justify-content: space-between; align-items: center; position: relative; }
   .profile-header .top .set { font-size: 22px; }
   .profile-user { display: flex; gap: 14px; align-items: center; margin-top: 14px; position: relative; }
   .avatar {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.25);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid rgba(255,255,255,0.5);
     display: flex; align-items: center; justify-content: center;
     font-size: 32px;
-    border: 2px solid rgba(255,255,255,0.5);
   }
   .profile-user .uinfo .nm { font-size: 18px; font-weight: 700; }
-  .profile-user .uinfo .id { font-size: 12px; opacity: .9; margin-top: 4px; }
+  .profile-user .uinfo .id { font-size: 12px; opacity: .92; margin-top: 4px; }
 
   .profile-body { margin-top: -42px; padding: 0 16px; position: relative; z-index: 2; }
   .quick-grid {
-    background: #fff;
-    border-radius: 18px;
-    padding: 18px 8px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    box-shadow: var(--shadow);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 18px; padding: 18px 8px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
   }
   .quick-grid .qc { text-align: center; cursor: pointer; }
   .quick-grid .qc .ic {
-    width: 42px; height: 42px;
-    margin: 0 auto 8px;
-    border-radius: 12px;
+    width: 42px; height: 42px; margin: 0 auto 8px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    background: var(--grad-soft);
+    font-size: 20px; background: var(--grad-soft);
   }
   .quick-grid .qc .nm { font-size: 11.5px; color: var(--text); }
 
   .menu-card {
-    background: #fff;
-    border-radius: 16px;
-    margin-top: 14px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px; margin-top: 14px; overflow: hidden;
   }
-  .menu-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-  }
-  .menu-row + .menu-row { border-top: 1px solid var(--line); }
+  .menu-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
+  .menu-row + .menu-row { border-top: 1px solid rgba(255,255,255,0.4); }
   .menu-row .ic {
-    width: 32px; height: 32px;
-    border-radius: 9px;
+    width: 32px; height: 32px; border-radius: 9px;
     background: var(--grad-soft);
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
+    font-size: 16px; flex-shrink: 0;
   }
   .menu-row .nm { flex: 1; font-size: 14px; }
   .menu-row .arr { color: var(--text-3); font-size: 14px; }
   .logout-btn {
     margin: 20px 16px;
-    background: #fff;
-    color: #ef4444;
-    border: none;
-    padding: 14px;
-    border-radius: 14px;
-    font-size: 14px;
-    font-weight: 600;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #ef4444; padding: 14px; border-radius: 14px;
+    font-size: 14px; font-weight: 600;
     width: calc(100% - 32px);
-    box-shadow: var(--shadow);
-    cursor: pointer;
+    box-shadow: var(--glass-shadow); cursor: pointer;
   }
 
   /* ============ 详情页 ============ */
   .detail-top {
     display: flex; align-items: center; justify-content: space-between;
     padding: 8px 16px;
-    background: #fff;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: var(--glass-border);
+    position: relative; z-index: 3;
   }
   .detail-head {
-    background: #fff;
-    padding: 6px 16px 18px;
-    display: flex; gap: 14px;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    margin: 12px 16px 0;
+    border-radius: 18px;
+    padding: 16px;
+    display: flex; gap: 14px; align-items: center;
   }
   .detail-head .info { flex: 1; }
   .detail-head .info .name { font-size: 19px; font-weight: 700; }
@@ -603,156 +579,122 @@
   .detail-head .info .stats .s { font-size: 11px; color: var(--text-3); }
   .detail-head .info .stats .s b { color: var(--text); font-size: 13px; display: block; }
   .detail-dl-btn {
-    background: var(--grad);
-    color: #fff;
-    border: none;
-    width: calc(100% - 32px);
-    margin: 16px;
-    padding: 14px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: 700;
-    box-shadow: 0 10px 22px rgba(99,102,241,0.4);
-    cursor: pointer;
+    background: var(--grad); color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    width: calc(100% - 32px); margin: 16px; padding: 14px;
+    border-radius: 14px; font-size: 15px; font-weight: 700;
+    box-shadow: 0 10px 22px rgba(99,102,241,0.4); cursor: pointer;
   }
-  .detail-section { padding: 16px; background: #fff; margin-top: 10px; }
+  .detail-section {
+    padding: 16px; margin: 0 16px 12px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+  }
   .detail-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
   .detail-section h3::before { content: ""; width: 4px; height: 14px; background: var(--grad); border-radius: 2px; }
   .detail-section p { font-size: 13px; color: var(--text-2); line-height: 1.7; }
   .detail-section .notice-box {
-    background: #fff7ed;
+    background: rgba(245,158,11,0.18);
     border-left: 3px solid #f59e0b;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 12.5px;
-    color: #92400e;
-    line-height: 1.7;
+    padding: 10px 12px; border-radius: 8px;
+    font-size: 12.5px; color: #92400e; line-height: 1.7;
   }
-  .rec-scroll {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding: 4px 16px 8px;
-  }
+  .rec-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 4px; }
   .rec-scroll::-webkit-scrollbar { display: none; }
-  .rec-card {
-    flex-shrink: 0;
-    width: 96px;
-    text-align: center;
-  }
+  .rec-card { flex-shrink: 0; width: 96px; text-align: center; }
   .rec-card .ic { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #fff; }
   .rec-card .nm { font-size: 12px; margin-top: 8px; font-weight: 600; }
   .rec-card .sz { font-size: 10.5px; color: var(--text-3); margin-top: 2px; }
 
   /* ============ 登录页 ============ */
-  .page-login {
-    background: #fff;
-  }
-  .login-logo {
-    margin: 30px 0 18px;
-    text-align: center;
-  }
+  .page-login { background: transparent; }
+  .login-logo { margin: 30px 0 18px; text-align: center; }
   .login-logo .lg {
-    width: 76px; height: 76px;
-    margin: 0 auto 14px;
-    border-radius: 22px;
+    width: 76px; height: 76px; margin: 0 auto 14px; border-radius: 22px;
     background: var(--grad);
+    border: 1px solid rgba(255,255,255,0.4);
     display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
-    color: #fff;
-    box-shadow: 0 14px 30px rgba(99,102,241,0.4);
+    font-size: 40px; color: #fff;
+    box-shadow: 0 14px 30px rgba(99,102,241,0.45);
     animation: pop .7s cubic-bezier(.2,.9,.3,1.4);
   }
   .login-logo h1 { font-size: 22px; font-weight: 800; }
-  .login-logo p { font-size: 12.5px; color: var(--text-3); margin-top: 6px; }
+  .login-logo p { font-size: 12.5px; color: var(--text-2); margin-top: 6px; }
   .login-tabs {
-    display: flex;
-    margin: 0 28px;
-    border-bottom: 1px solid var(--line);
+    display: flex; margin: 0 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: var(--glass-border);
+    border-radius: 14px 14px 0 0;
   }
   .login-tabs .t {
-    flex: 1; text-align: center;
-    padding: 12px 0;
-    font-size: 15px;
-    color: var(--text-3);
-    cursor: pointer;
-    position: relative;
-    font-weight: 600;
+    flex: 1; text-align: center; padding: 12px 0;
+    font-size: 15px; color: var(--text-3); cursor: pointer;
+    position: relative; font-weight: 600;
   }
   .login-tabs .t.active { color: var(--primary); }
   .login-tabs .t.active::after {
-    content: "";
-    position: absolute;
-    bottom: -1px; left: 50%;
-    transform: translateX(-50%);
-    width: 28px; height: 3px;
-    background: var(--grad);
-    border-radius: 2px;
+    content: ""; position: absolute; bottom: -1px; left: 50%;
+    transform: translateX(-50%); width: 28px; height: 3px;
+    background: var(--grad); border-radius: 2px;
   }
-  .login-form { padding: 22px 28px; }
+  .login-form {
+    padding: 22px 28px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-top: none;
+    box-shadow: var(--glass-shadow);
+    margin: 0 28px;
+    border-radius: 0 0 14px 14px;
+  }
   .form-group { margin-bottom: 16px; }
   .form-group label { font-size: 12.5px; color: var(--text-2); display: block; margin-bottom: 6px; }
   .form-group .input-wrap {
     display: flex; align-items: center;
-    background: #f4f5f9;
-    border-radius: 12px;
-    padding: 0 14px;
-    border: 1.5px solid transparent;
-    transition: border .2s;
+    background: rgba(255,255,255,0.5);
+    border-radius: 12px; padding: 0 14px;
+    border: 1.5px solid transparent; transition: border .2s;
   }
-  .form-group .input-wrap:focus-within { border-color: var(--primary); background: #fff; }
+  .form-group .input-wrap:focus-within { border-color: var(--primary); background: rgba(255,255,255,0.75); }
   .form-group .input-wrap .pre { color: var(--text-3); margin-right: 10px; font-size: 16px; }
   .form-group input {
-    flex: 1;
-    border: none; outline: none; background: transparent;
-    padding: 13px 0;
-    font-size: 14px;
-    color: var(--text);
+    flex: 1; border: none; outline: none; background: transparent;
+    padding: 13px 0; font-size: 14px; color: var(--text);
   }
   .form-group .code-btn {
-    background: var(--grad-soft);
-    color: var(--primary);
-    border: none;
-    padding: 7px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
+    background: var(--grad-soft); color: var(--primary);
+    border: none; padding: 7px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
   }
   .submit-btn {
-    width: 100%;
-    background: var(--grad);
-    color: #fff;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 700;
-    margin-top: 8px;
-    box-shadow: 0 10px 22px rgba(99,102,241,0.4);
-    cursor: pointer;
+    width: 100%; background: var(--grad); color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 14px; border-radius: 12px;
+    font-size: 15px; font-weight: 700; margin-top: 8px;
+    box-shadow: 0 10px 22px rgba(99,102,241,0.4); cursor: pointer;
   }
   .login-agreement {
-    text-align: center;
-    font-size: 11.5px;
-    color: var(--text-3);
-    padding: 0 28px;
-    margin-top: 14px;
-    line-height: 1.7;
+    text-align: center; font-size: 11.5px; color: var(--text-2);
+    padding: 14px 28px 0; line-height: 1.7;
   }
   .login-agreement a { color: var(--primary); text-decoration: none; }
-  .login-third {
-    display: flex; gap: 18px; justify-content: center;
-    margin-top: 22px;
-  }
+  .login-third { display: flex; gap: 18px; justify-content: center; margin-top: 22px; }
   .login-third .ti {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: #f4f5f9;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: var(--glass-border);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
+    font-size: 18px; cursor: pointer;
   }
 
   .hidden { display: none !important; }
@@ -767,7 +709,7 @@
       <!-- ============ 启动页 ============ -->
       <section class="page page-splash active" data-page="splash">
         <div class="splash-count">跳过 <b id="count">3</b>s</div>
-        <div style="display:flex;flex-direction:column;align-items:center;margin-top:60px;">
+        <div style="display:flex;flex-direction:column;align-items:center;margin-top:60px;position:relative;z-index:2;">
           <div class="splash-logo">📦</div>
           <div class="splash-name">软件库</div>
           <div class="splash-slogan">海量软件 · 一键直达</div>
@@ -782,9 +724,7 @@
       <section class="page" data-page="home">
         <div class="statusbar">
           <span>9:41</span>
-          <div class="icons">
-            <span>📶</span><span>🔋</span>
-          </div>
+          <div class="icons"><span>📶</span><span>🔋</span></div>
         </div>
         <div class="scroll">
           <div class="search-bar">
@@ -867,24 +807,34 @@
         </div>
       </section>
 
-      <!-- ============ 软件页 ============ -->
+      <!-- ============ 软件页（新增搜索栏） ============ -->
       <section class="page" data-page="software">
         <div class="statusbar">
           <span>9:41</span>
           <div class="icons"><span>📶</span><span>🔋</span></div>
         </div>
-        <div class="tabs" id="swTabs">
-          <div class="tab active">全部</div>
-          <div class="tab">🔥 热门</div>
-          <div class="tab">🛠 工具</div>
-          <div class="tab">🎮 游戏</div>
-          <div class="tab">🎬 影音</div>
-          <div class="tab">📚 教育</div>
+
+        <!-- 搜索栏（毛玻璃） -->
+        <div class="sw-search">
+          <span class="ic">🔍</span>
+          <input id="swSearch" type="text" placeholder="搜索软件名称">
+          <span class="clear" id="swClear">✕</span>
         </div>
+
+        <!-- 分类标签 -->
+        <div class="tabs" id="swTabs">
+          <div class="tab active" data-cat="全部">全部</div>
+          <div class="tab" data-cat="热门">🔥 热门</div>
+          <div class="tab" data-cat="工具">🛠 工具</div>
+          <div class="tab" data-cat="游戏">🎮 游戏</div>
+          <div class="tab" data-cat="影音">🎬 影音</div>
+          <div class="tab" data-cat="教育">📚 教育</div>
+        </div>
+
         <div class="scroll">
           <div class="section-head"><h2>🏆 软件排行</h2><span class="more">榜单 ›</span></div>
-          <div style="background:#fff;margin:0 16px;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;">
-            <div class="rank-item">
+          <div class="card" id="swList">
+            <div class="rank-item" data-name="影视大全" data-cat="影音" data-hot="1">
               <div class="rank-num top1">1</div>
               <div class="app-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">🎬</div>
               <div class="info">
@@ -897,7 +847,7 @@
                 <button class="btn-grad" style="margin-top:6px;">下载</button>
               </div>
             </div>
-            <div class="rank-item">
+            <div class="rank-item" data-name="极速浏览器" data-cat="工具" data-hot="1">
               <div class="rank-num top2">2</div>
               <div class="app-icon" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">🚀</div>
               <div class="info">
@@ -910,7 +860,7 @@
                 <button class="btn-grad" style="margin-top:6px;">下载</button>
               </div>
             </div>
-            <div class="rank-item">
+            <div class="rank-item" data-name="休闲游戏合集" data-cat="游戏" data-hot="1">
               <div class="rank-num top3">3</div>
               <div class="app-icon" style="background:linear-gradient(135deg,#10b981,#059669)">🎮</div>
               <div class="info">
@@ -923,7 +873,7 @@
                 <button class="btn-grad" style="margin-top:6px;">下载</button>
               </div>
             </div>
-            <div class="rank-item">
+            <div class="rank-item" data-name="学习宝典" data-cat="教育" data-hot="0">
               <div class="rank-num">4</div>
               <div class="app-icon" style="background:linear-gradient(135deg,#8b5cf6,#a855f7)">📚</div>
               <div class="info">
@@ -936,7 +886,7 @@
                 <button class="btn-grad" style="margin-top:6px;">下载</button>
               </div>
             </div>
-            <div class="rank-item">
+            <div class="rank-item" data-name="清理大师" data-cat="工具" data-hot="0">
               <div class="rank-num">5</div>
               <div class="app-icon" style="background:linear-gradient(135deg,#f59e0b,#ea580c)">🧹</div>
               <div class="info">
@@ -949,6 +899,25 @@
                 <button class="btn-grad" style="margin-top:6px;">下载</button>
               </div>
             </div>
+            <div class="rank-item" data-name="音乐播放器" data-cat="影音" data-hot="0">
+              <div class="rank-num">6</div>
+              <div class="app-icon" style="background:linear-gradient(135deg,#ec4899,#db2777)">🎵</div>
+              <div class="info">
+                <div class="name">音乐播放器</div>
+                <div class="desc">无损音质，海量曲库任你听</div>
+                <div class="meta">25.8MB · 影音</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="dl">下载 156万</div>
+                <button class="btn-grad" style="margin-top:6px;">下载</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 无结果提示 -->
+          <div class="sw-empty" id="swEmpty">
+            <span class="em">🔍</span>
+            没有找到相关软件
           </div>
         </div>
       </section>
@@ -1005,7 +974,7 @@
 
           <div class="section-head"><h2>🔥 热门活动</h2></div>
           <div style="padding:0 16px;display:flex;flex-direction:column;gap:12px;">
-            <div style="background:#fff;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow);">
+            <div class="discover-act">
               <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-size:24px;">🎁</div>
               <div style="flex:1;">
                 <div style="font-size:14px;font-weight:600;">新人礼包</div>
@@ -1013,7 +982,7 @@
               </div>
               <button class="btn-outline">领取</button>
             </div>
-            <div style="background:#fff;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow);">
+            <div class="discover-act">
               <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#3b82f6,#2563eb);display:flex;align-items:center;justify-content:center;font-size:24px;">📅</div>
               <div style="flex:1;">
                 <div style="font-size:14px;font-weight:600;">每日签到</div>
@@ -1254,7 +1223,7 @@
 </div>
 
 <script>
-  // 页面切换
+  // ============ 页面切换 ============
   const pages = document.querySelectorAll('.page');
   const btns = document.querySelectorAll('#switcher button');
   btns.forEach(b => {
@@ -1262,13 +1231,12 @@
       const target = b.dataset.target;
       pages.forEach(p => p.classList.toggle('active', p.dataset.page === target));
       btns.forEach(x => x.classList.toggle('active', x === b));
-      // 重置滚动到顶部
       const active = document.querySelector('.page.active .scroll');
       if (active) active.scrollTop = 0;
     });
   });
 
-  // 启动页倒计时
+  // ============ 启动页倒计时 ============
   let count = 3;
   const countEl = document.getElementById('count');
   const timer = setInterval(() => {
@@ -1276,19 +1244,58 @@
     if (countEl) countEl.textContent = count;
     if (count <= 0) {
       clearInterval(timer);
-      document.querySelector('[data-target="home"]').click();
+      const homeBtn = document.querySelector('[data-target="home"]');
+      if (homeBtn) homeBtn.click();
     }
   }, 1000);
 
-  // 软件页分类切换
-  document.querySelectorAll('#swTabs .tab').forEach(t => {
+  // ============ 软件页：分类切换 + 搜索实时过滤 ============
+  const swTabs = document.querySelectorAll('#swTabs .tab');
+  const swSearch = document.getElementById('swSearch');
+  const swClear = document.getElementById('swClear');
+  const swItems = document.querySelectorAll('#swList .rank-item');
+  const swEmpty = document.getElementById('swEmpty');
+  let swCurrentCat = '全部';
+
+  function filterSoftware() {
+    const q = (swSearch.value || '').trim().toLowerCase();
+    swClear.classList.toggle('show', q.length > 0);
+    let visible = 0;
+    swItems.forEach(it => {
+      const name = (it.dataset.name || '').toLowerCase();
+      const cat = it.dataset.cat || '';
+      const hot = it.dataset.hot === '1';
+      const matchText = !q || name.indexOf(q) !== -1;
+      let matchCat = true;
+      if (swCurrentCat === '热门') {
+        matchCat = hot;
+      } else if (swCurrentCat !== '全部') {
+        matchCat = cat === swCurrentCat;
+      }
+      const ok = matchText && matchCat;
+      it.style.display = ok ? '' : 'none';
+      if (ok) visible++;
+    });
+    swEmpty.style.display = visible ? 'none' : 'block';
+  }
+
+  swTabs.forEach(t => {
     t.addEventListener('click', () => {
-      document.querySelectorAll('#swTabs .tab').forEach(x => x.classList.remove('active'));
+      swTabs.forEach(x => x.classList.remove('active'));
       t.classList.add('active');
+      swCurrentCat = t.dataset.cat || '全部';
+      filterSoftware();
     });
   });
 
-  // 登录/注册 Tab 切换
+  swSearch.addEventListener('input', filterSoftware);
+  swClear.addEventListener('click', () => {
+    swSearch.value = '';
+    filterSoftware();
+    swSearch.focus();
+  });
+
+  // ============ 登录/注册 Tab 切换 ============
   document.querySelectorAll('#loginTabs .t').forEach(t => {
     t.addEventListener('click', () => {
       document.querySelectorAll('#loginTabs .t').forEach(x => x.classList.remove('active'));
