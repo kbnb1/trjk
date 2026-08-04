@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- bg_splash.xml - 启动页背景渐变 -->
+<!-- bg_splash.xml - 启动页背景。注意：不能用<bitmap android:src="@mipmap/ic_launcher"/>，
+     因为 ic_launcher 是 adaptive-icon（复合Drawable），套 <bitmap> 会在运行时抛 InflateException。
+     本文件同时作为 Theme.SoftwareStore.Splash 的 windowBackground，
+     会在 Activity.attachBaseContext 阶段（Looper/Application.onCreate之前）被系统解析，
+     一旦解析失败就是"闪一下直接死"。所以这里只用简单、安全的元素。 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
             <gradient
                 android:angle="135"
                 android:startColor="@color/gradient_start"
+                android:centerColor="#6366F1"
                 android:endColor="@color/gradient_end"
                 android:type="linear" />
         </shape>
     </item>
     <item android:gravity="center">
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/ic_launcher" />
+        <!-- 用一个简单、安全的 Drawable 做Logo，避免引用 adaptive-icon -->
+        <inset android:inset="96dp">
+            <shape android:shape="oval">
+                <solid android:color="#E6FFFFFF" />
+            </shape>
+        </inset>
     </item>
 </layer-list>

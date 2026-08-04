@@ -27,12 +27,41 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
-        tvCount = findViewById(R.id.tv_count);
-
-        // 跳过按钮点击
-        findViewById(R.id.tv_skip).setOnClickListener(v -> goNext());
+        // 保底策略：setContentView 一旦因为资源异常 / InflateException 崩掉，
+        // 立刻回退到纯代码构造的最小布局，保证"至少能看到启动页"，不会闪一下就死。
+        try {
+            setContentView(R.layout.activity_splash);
+            tvCount = findViewById(R.id.tv_count);
+            // 跳过按钮点击
+            findViewById(R.id.tv_skip).setOnClickListener(v -> goNext());
+        } catch (Throwable t) {
+            android.util.Log.e("Splash", "setContentView fallback triggered", t);
+            // 代码构造兜底：一个全屏渐变背景 + 居中文字
+            android.widget.FrameLayout root = new android.widget.FrameLayout(this);
+            try {
+                root.setBackgroundResource(R.drawable.bg_gradient_page);
+            } catch (Throwable ignored) {
+                root.setBackgroundColor(0xFFC7D2FE);
+            }
+            android.widget.TextView tip = new android.widget.TextView(this);
+            tip.setText("软件库 - 启动中");
+            tip.setTextColor(0xFF1F2330);
+            tip.setTextSize(20f);
+            tip.setTypeface(null, android.graphics.Typeface.BOLD);
+            android.widget.FrameLayout.LayoutParams lp =
+                    new android.widget.FrameLayout.LayoutParams(
+                            android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                            android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.gravity = android.view.Gravity.CENTER;
+            root.addView(tip, lp);
+            setContentView(root);
+            // 3 秒后强制跳转，不依赖控件id
+            tvCount = null;
+            new android.os.Handler(android.os.Looper.getMainLooper())
+                    .postDelayed(this::goNext, 2000);
+            return;
+        }
 
         startCountDown();
     }
@@ -48,7 +77,12 @@ public class SplashActivity extends AppCompatActivity {
                 if (remain == 0) {
                     remain = 3;
                 }
-                tvCount.setText(String.valueOf(remain));
+                if (tvCount != null) {
+                    try {
+                        tvCount.setText(String.valueOf(remain));
+                    } catch (Throwable ignored) {
+                    }
+                }
             }
 
             @Override

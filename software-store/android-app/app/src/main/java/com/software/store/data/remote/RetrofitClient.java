@@ -51,15 +51,33 @@ public class RetrofitClient {
     }
 
     /**
-     * 初始化 Retrofit（在 Application 中调用）
+     * 初始化 Retrofit（在 Application 中调用）。
+     * 注：本方法必须保证"永不抛出异常"——否则 Application.onCreate 会在启动早期
+     * 直接崩溃，表现为"闪一下就没了"。任何失败都只打 Log，不抛。
      */
     public void init() {
+        try {
+            initInternal();
+        } catch (Throwable t) {
+            android.util.Log.e("RetrofitClient", "init-failed (network client disabled): " + t.getMessage());
+            retrofit = null;
+            apiService = null;
+        }
+    }
+
+    private void initInternal() {
         // 日志拦截器：打印请求与响应
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
             // 实际项目中可替换为日志框架
-            android.util.Log.d("OkHttp", message);
+            try {
+                android.util.Log.d("OkHttp", message);
+            } catch (Throwable ignored) {
+            }
         });
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        try {
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        } catch (Throwable ignored) {
+        }
 
         // Token 拦截器：在请求头中追加 Authorization
         okhttp3.Interceptor tokenInterceptor = chain -> {
@@ -116,7 +134,10 @@ public class RetrofitClient {
      */
     public ApiService getApiService() {
         if (apiService == null) {
-            init();
+            try {
+                init();
+            } catch (Throwable ignored) {
+            }
         }
         return apiService;
     }
