@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "com.software.store.app-mergeDebugResources-35:/layout/activity_software_detail.xml",
+        "source": "com.software.store.app-main-38:/layout/activity_software_detail.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/fragment_profile.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/activity_software_detail.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_software_detail.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/activity_splash.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/activity_main.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/fragment_discover.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_discover.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/activity_login.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/item_software_recommend.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_software_recommend.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/fragment_software.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_software.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/item_software.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_software.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/fragment_home.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-mergeDebugResources-35:/layout/item_banner.xml",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_banner.xml"
+    }
+]

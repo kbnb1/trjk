@@ -63,7 +63,7 @@
     </style>
 
     <!-- 圆形图标按钮 -->
-    <style name="Widget.IconButton">
+    <style name="Widget.IconButton" parent="android:Widget">
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:background">@drawable/bg_icon_circle</item>

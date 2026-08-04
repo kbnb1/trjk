@@ -1,19 +1,13 @@
-// 顶层 build.gradle - 项目级配置
+// 顶层 build.gradle - 项目级配置（使用腾讯云镜像）
 buildscript {
     repositories {
-        google()
-        mavenCentral()
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-google/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-central/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-gradle-plugin/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
+        classpath 'com.android.tools.build:gradle:8.5.2'
     }
 }
 

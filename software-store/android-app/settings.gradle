@@ -1,3 +1,21 @@
-// settings.gradle - 项目设置
+// settings.gradle - 项目设置（使用腾讯云镜像）
+pluginManagement {
+    repositories {
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-google/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-central/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-gradle-plugin/' }
+        maven { url 'https://jitpack.aliyun.com' }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-google/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-central/' }
+        maven { url 'https://jitpack.aliyun.com' }
+    }
+}
 include ':app'
-rootProject.name = "软件库"
+rootProject.name = "software-store"

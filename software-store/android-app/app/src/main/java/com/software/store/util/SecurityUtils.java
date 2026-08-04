@@ -7,6 +7,8 @@ import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Debug;
 
+import com.software.store.BuildConfig;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
@@ -63,7 +65,7 @@ public class SecurityUtils {
      * 检测是否处于调试模式
      */
     public static boolean isDebugMode() {
-        return Build.DEBUG || Debug.isDebuggerConnected();
+        return BuildConfig.DEBUG || Debug.isDebuggerConnected();
     }
 
     /**

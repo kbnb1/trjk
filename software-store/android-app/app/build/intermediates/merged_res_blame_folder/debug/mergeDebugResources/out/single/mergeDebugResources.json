@@ -1,0 +1,186 @@
+[
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_item_software.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_software.xml"
+    },
+    {
+        "merged": "com.software.store.app-debug-36:/layout_activity_software_detail.xml.flat",
+        "source": "com.software.store.app-main-38:/layout/activity_software_detail.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_notice_box.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_notice_box.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_gradient_header.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_gradient_header.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_btn_gradient.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_btn_gradient.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_gradient_page.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_gradient_page.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_ad_dashed.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_ad_dashed.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_green.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_green.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_app_icon.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_app_icon.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_circle.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_circle.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_search_bar.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_search_bar.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_avatar.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_avatar.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_fragment_software.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_software.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_ic_launcher_background.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_blue.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_blue.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_item_software_recommend.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_software_recommend.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_section_indicator.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_section_indicator.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/menu_bottom_nav_menu.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_card.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_card.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_logo.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_logo.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_code_btn.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_code_btn.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_dot.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_dot.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_glass_input.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_glass_input.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_splash.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_splash.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_orange.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_orange.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_item_banner.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_banner.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_purple.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_purple.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_fragment_home.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_fragment_profile.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_glass.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_glass.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_activity_main.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_activity_splash.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_banner_tag.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_banner_tag.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_activity_software_detail.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_software_detail.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_fragment_discover.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/fragment_discover.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_pink.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_pink.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_glass_circle.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_glass_circle.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_input.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_input.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/color_selector_bottom_nav.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/color/selector_bottom_nav.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_red.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_red.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_activity_login.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_skip.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_skip.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/xml_network_security_config.xml.flat",
+        "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/xml/network_security_config.xml"
+    }
+]

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#8B5CF6</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_gradient_1">#C7D2FE</color>
+    <color name="bg_gradient_2">#DDD6FE</color>
+    <color name="bg_gradient_3">#F5D0FE</color>
+    <color name="bg_gradient_4">#FBCFE8</color>
+    <color name="bg_input">#F4F5F9</color>
+    <color name="bg_page">#F0F4FF</color>
+    <color name="divider">#ECEEF3</color>
+    <color name="error">#EF4444</color>
+    <color name="glass_bg">#A6FFFFFF</color>
+    <color name="glass_bg_dark">#801E293B</color>
+    <color name="glass_border">#33FFFFFF</color>
+    <color name="glass_shadow">#1A000000</color>
+    <color name="gradient_end">#8B5CF6</color>
+    <color name="gradient_start">#3B82F6</color>
+    <color name="half_transparent">#80000000</color>
+    <color name="info">#3B82F6</color>
+    <color name="primary">#3B82F6</color>
+    <color name="primary_dark">#2563EB</color>
+    <color name="rank_top1">#EF4444</color>
+    <color name="rank_top2">#F59E0B</color>
+    <color name="rank_top3">#EAB308</color>
+    <color name="secondary">#8B5CF6</color>
+    <color name="success">#10B981</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="text_primary">#1F2330</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="warning">#F59E0B</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <string name="app_name">软件库</string>
+    <string name="app_slogan">海量软件 · 一键直达</string>
+    <string name="btn_download">下载</string>
+    <string name="btn_get">领取</string>
+    <string name="btn_get_code">获取验证码</string>
+    <string name="btn_login">登 录</string>
+    <string name="btn_register">注 册</string>
+    <string name="btn_sign">签到</string>
+    <string name="cancel">取消</string>
+    <string name="cat_all">全部</string>
+    <string name="cat_edu">教育</string>
+    <string name="cat_game">游戏</string>
+    <string name="cat_hot">热门</string>
+    <string name="cat_media">影音</string>
+    <string name="cat_tool">工具</string>
+    <string name="confirm">确定</string>
+    <string name="detail_download">立即下载</string>
+    <string name="detail_download_count">下载量</string>
+    <string name="detail_intro">软件介绍</string>
+    <string name="detail_notice">使用须知</string>
+    <string name="detail_rating">评分</string>
+    <string name="detail_recommend">应用推荐</string>
+    <string name="detail_share">分享</string>
+    <string name="detail_update">更新</string>
+    <string name="discover_crypto">加密解密</string>
+    <string name="discover_game">怀旧游戏</string>
+    <string name="discover_ip_query">IP查询</string>
+    <string name="discover_live">直播解析</string>
+    <string name="discover_news">每日早报</string>
+    <string name="discover_player">全能播放器</string>
+    <string name="discover_qrcode">二维码</string>
+    <string name="discover_short_url">短链解析</string>
+    <string name="discover_source">网页源码</string>
+    <string name="discover_speed_test">网速测试</string>
+    <string name="discover_title">发现</string>
+    <string name="discover_vip_parser">VIP解析器</string>
+    <string name="discover_vip_video">全网VIP影视</string>
+    <string name="discover_whois">域名查询</string>
+    <string name="discover_wifi">WiFi密码</string>
+    <string name="download_start">开始下载</string>
+    <string name="download_success">下载完成</string>
+    <string name="empty">暂无数据</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="hint_email">请输入邮箱</string>
+    <string name="hint_password">请输入密码</string>
+    <string name="hint_phone">请输入手机号</string>
+    <string name="hint_set_password">请设置密码</string>
+    <string name="hint_set_username">请设置用户名</string>
+    <string name="hint_username">请输入用户名</string>
+    <string name="home_more">更多</string>
+    <string name="home_notice">公告专区</string>
+    <string name="home_recommend">推荐软件</string>
+    <string name="home_search_hint">搜索软件、游戏、工具</string>
+    <string name="load_failed">加载失败</string>
+    <string name="loading">加载中…</string>
+    <string name="login_agreement">登录/注册即表示同意《用户协议》和《隐私政策》</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_tab">登录</string>
+    <string name="logout_success">已退出登录</string>
+    <string name="menu_discover">发现</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_profile">我的</string>
+    <string name="menu_software">软件</string>
+    <string name="more_arrow">›</string>
+    <string name="profile_about">关于我们</string>
+    <string name="profile_address">永久地址</string>
+    <string name="profile_business">商务联系</string>
+    <string name="profile_cache">清理缓存</string>
+    <string name="profile_click_login">点击登录</string>
+    <string name="profile_download">下载管理</string>
+    <string name="profile_feedback">软件反馈</string>
+    <string name="profile_group">加入群聊</string>
+    <string name="profile_logout">退出登录</string>
+    <string name="profile_not_login">未登录</string>
+    <string name="profile_share">分享软件</string>
+    <string name="profile_title">个人中心</string>
+    <string name="register_success">注册成功</string>
+    <string name="register_tab">注册</string>
+    <string name="retry">重试</string>
+    <string name="sms_login">短信登录</string>
+    <string name="software_rank">软件排行</string>
+    <string name="splash_ad">广告</string>
+    <string name="splash_skip">跳过</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_profile">我的</string>
+    <string name="tab_software">软件</string>
+    <string name="welcome_back">欢迎回来，请登录您的账号</string>
+    <style name="TextAppearance.Hint" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/text_hint</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="TextAppearance.Subtitle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.SoftwareStore" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/text_white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/text_white</item>
+        <item name="android:colorBackground">@color/bg_page</item>
+        <item name="colorSurface">@color/glass_bg</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@drawable/bg_gradient_page</item>
+    </style>
+    <style name="Theme.SoftwareStore.NoActionBar" parent="Theme.SoftwareStore">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/text_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Theme.SoftwareStore.Splash" parent="Theme.SoftwareStore.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Widget.GradientButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/bg_btn_gradient</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="cornerRadius">999dp</item>
+    </style>
+    <style name="Widget.IconButton" parent="android:Widget">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/bg_icon_circle</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Widget.OutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="cornerRadius">999dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingHorizontal">15dp</item>
+    </style>
+</resources>

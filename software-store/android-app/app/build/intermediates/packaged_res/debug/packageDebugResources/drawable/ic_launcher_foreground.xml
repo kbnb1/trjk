@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ic_launcher_foreground.xml - 启动器图标前景（软件库 📦 图标） -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 包裹盒子主体 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,30 L78,40 L78,68 L54,78 L30,68 L30,40 Z" />
+    <!-- 盒子顶部封口线 -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M54,30 L78,40 L54,50 L30,40 Z" />
+    <!-- 盒子中间竖线 -->
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M54,50 L54,78 L30,68 L30,40 Z" />
+    <!-- 盒子中间封口带 -->
+    <path
+        android:fillColor="#E0E7FF"
+        android:pathData="M42,35 L66,35 L66,73 L54,78 L42,73 Z" />
+</vector>

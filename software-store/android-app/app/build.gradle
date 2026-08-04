@@ -1,7 +1,5 @@
 // app/build.gradle - 应用模块配置
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
 
 android {
     namespace 'com.software.store'
@@ -31,6 +29,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 

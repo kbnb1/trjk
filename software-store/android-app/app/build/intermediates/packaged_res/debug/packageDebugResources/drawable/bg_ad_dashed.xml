@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bg_ad_dashed.xml - 启动页广告位虚线背景 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/white_20" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/white_50"
+        android:dashWidth="10dp"
+        android:dashGap="6dp" />
+    <corners android:radius="18dp" />
+</shape>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- menu/bottom_nav_menu.xml - 底部导航菜单 -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/nav_software"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/menu_software" />
+    <item
+        android:id="@+id/nav_discover"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/menu_discover" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="@string/menu_profile" />
+</menu>
