@@ -4,10 +4,6 @@
         "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/layout/item_software.xml"
     },
     {
-        "merged": "com.software.store.app-debug-36:/layout_activity_software_detail.xml.flat",
-        "source": "com.software.store.app-main-38:/layout/activity_software_detail.xml"
-    },
-    {
         "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_notice_box.xml.flat",
         "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_notice_box.xml"
     },
@@ -110,6 +106,10 @@
     {
         "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/drawable_bg_icon_orange.xml.flat",
         "source": "/root/.gradle/daemon/8.14.4/com.software.store.app-main-38:/drawable/bg_icon_orange.xml"
+    },
+    {
+        "merged": "com.software.store.app-debug-36:/drawable_bg_splash.xml.flat",
+        "source": "com.software.store.app-main-38:/drawable/bg_splash.xml"
     },
     {
         "merged": "/root/.gradle/daemon/8.14.4/com.software.store.app-debug-36:/layout_item_banner.xml.flat",
