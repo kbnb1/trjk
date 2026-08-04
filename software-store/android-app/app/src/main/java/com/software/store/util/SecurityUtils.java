@@ -23,40 +23,56 @@ public class SecurityUtils {
     private static final String EXPECTED_SIGNATURE_HASH = "REPLACE_WITH_REAL_SIGNATURE_HASH";
 
     /**
+     * 安全策略开关：是否启用"检测到风险即退出应用"
+     * —— Debug/预览/开发阶段默认关闭，只打Warn日志，避免正常用户"点开就闪退"
+     * —— 正式上架打 Release 包时可改为 true（且需把 EXPECTED_SIGNATURE_HASH 换成正式签名哈希）
+     */
+    private static final boolean EXIT_ON_COMPROMISE = false;
+
+    /**
      * 综合安全检测，在Application.onCreate中调用
+     * 当前策略为"只告警不退出"，确保App至少能正常启动
      */
     public static void performSecurityCheck(Context context) {
-        if (isDebugMode()) {
-            // 调试模式下仅记录日志，不退出
-            android.util.Log.w("Security", "Debug mode detected");
-            return;
+        StringBuilder sb = new StringBuilder();
+        try {
+            if (isDebugMode()) {
+                sb.append("[DebugMode] ");
+            }
+            if (!verifySignature(context)) {
+                sb.append("[SignatureMismatch] ");
+            }
+            if (isRooted()) {
+                sb.append("[Rooted] ");
+            }
+            if (isEmulator()) {
+                sb.append("[Emulator] ");
+            }
+            if (isHooked()) {
+                sb.append("[Hooked] ");
+            }
+            if (isVirtualApp(context)) {
+                sb.append("[VirtualApp] ");
+            }
+        } catch (Throwable t) {
+            // 安全检测本身不能导致应用崩溃
+            android.util.Log.e("Security", "security-check-throw", t);
+            sb = new StringBuilder("[CheckError]");
         }
 
-        boolean compromised = false;
-
-        // 签名校验
-        if (!verifySignature(context)) {
-            compromised = true;
-        }
-
-        // Root检测
-        if (isRooted()) {
-            compromised = true;
-        }
-
-        // 模拟器检测
-        if (isEmulator()) {
-            compromised = true;
-        }
-
-        // Hook框架检测
-        if (isHooked()) {
-            compromised = true;
-        }
-
+        boolean compromised = sb.length() > 0;
         if (compromised) {
-            // 安全风险，退出应用
-            android.os.Process.killProcess(android.os.Process.myPid());
+            android.util.Log.w("Security", "Security flags: " + sb.toString());
+        } else {
+            android.util.Log.i("Security", "Security check passed.");
+        }
+
+        if (EXIT_ON_COMPROMISE && compromised && !BuildConfig.DEBUG) {
+            android.util.Log.wtf("Security", "Security policy: EXIT due to compromise = " + sb);
+            try {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            } catch (Throwable ignored) {
+            }
             System.exit(1);
         }
     }
